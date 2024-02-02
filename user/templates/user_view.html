@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<center>
+    <h1>Users</h1>
+        {% if users %}
+        <table border="1">
+        <thead>
+            <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>Country</th>
+            <th>Education Qu.</th>
+            <th>Designation</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+            <td>{% if user.fullname %}{{ user.fullname }}{% else %}N/A{% endif %}</td>
+            <td>{% if user.email %}{{ user.email }}{% else %}N/A{% endif %}</td>
+            <td>{% if user.gender %}{{ user.gender }}{% else %}N/A{% endif %}</td>
+            <td>{% if user.address %}{{ user.address }}{% else %}N/A{% endif %}</td>
+            <td>{% if user.city %}{{ user.city }}{% else %}N/A{% endif %}</td>
+            <td>{% if user.country %}{{ user.country }}{% else %}N/A{% endif %}</td>
+            <td>{% if user.education_qualification %}{{ user.education_qualification }}{% else %}N/A{% endif %}</td>
+            <td>{% if user.designation %}{{ user.designation }}{% else %}N/A{% endif %}</td>
+            <td><a href="{% url "user:user_update" user.id %}">edit</a></td>
+            <td><a href="{% url "user:user_delete" user.id %}">delete</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+
+        <a href="{% url "user:user_create" %}">New</a>
+        {% else %}
+          <h3>No users yet.</h3>
+          <a href="{% url 'user:user_create' %}">Add user</a>
+      {% endif %}
+</center>
+{% endblock %}
